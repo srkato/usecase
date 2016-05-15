@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/katosoft.usecase.model/src" modelPluginID="katosoft.usecase.model"
-    modelName="Model" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    modelName="Mode" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
     operationReflection="true" importOrganizing="true">
   <foreignModel>model.ecore</foreignModel>
-  <genPackages prefix="Model" disposableProviderFactory="true" ecorePackage="model.ecore#/">
-    <genClasses ecoreClass="model.ecore#//Project"/>
-    <genClasses ecoreClass="model.ecore#//ModelElement">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//NamedElement/description"/>
-    </genClasses>
+  <genPackages prefix="Usecase" disposableProviderFactory="true" ecorePackage="model.ecore#/">
+    <genClasses ecoreClass="model.ecore#//ModelElement"/>
     <genClasses ecoreClass="model.ecore#//NamedElement">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//NamedElement/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//NamedElement/description"/>
     </genClasses>
     <genClasses ecoreClass="model.ecore#//UseCase">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//UseCase/scenario"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//UseCase/preCondition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//UseCase/postCondition"/>
     </genClasses>
     <genClasses ecoreClass="model.ecore#//Package">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Package/pakageable"/>
@@ -23,39 +22,42 @@
     <genClasses ecoreClass="model.ecore#//Pakageable"/>
     <genClasses ecoreClass="model.ecore#//Scenario">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Scenario/steps"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//Scenario/firstStep"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//Scenario/usecase"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference model.ecore#//Scenario/ownedUsecase"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//Scenario/label"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Scenario/guardCondition"/>
     </genClasses>
     <genClasses ecoreClass="model.ecore#//Step">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//Step/explanation"/>
-    </genClasses>
-    <genClasses ecoreClass="model.ecore#//SwitchStep">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//SwitchStep/case"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//SwitchStep/defaultStep"/>
-    </genClasses>
-    <genClasses ecoreClass="model.ecore#//Case">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//Case/text"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//Case/nextStep"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//Step/next"/>
     </genClasses>
     <genClasses ecoreClass="model.ecore#//ActionStep">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//ActionStep/nextStep"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//ActionStep/action"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//ActionStep/actor"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//ActionStep/object"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//Action/text"/>
     </genClasses>
     <genClasses ecoreClass="model.ecore#//Actor">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Actor/action"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//Actor/general"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//Actor/allActions"/>
     </genClasses>
     <genClasses ecoreClass="model.ecore#//Action">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//Action/owner"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference model.ecore#//Action/owner"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//Action/text"/>
     </genClasses>
-    <genClasses ecoreClass="model.ecore#//UseCasePackage">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//UseCasePackage/system"/>
+    <genClasses ecoreClass="model.ecore#//UseCaseProject">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//UseCaseProject/system"/>
     </genClasses>
     <genClasses ecoreClass="model.ecore#//ActorGroup">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//ActorGroup/member"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//IncludeUseCase">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//IncludeUseCase/usecase"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//IncludeUseCase/exceptionFlow"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//EndOfUseCase"/>
+    <genClasses ecoreClass="model.ecore#//ExceptionalEnd"/>
+    <genClasses ecoreClass="model.ecore#//Condition">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//Condition/text"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>
